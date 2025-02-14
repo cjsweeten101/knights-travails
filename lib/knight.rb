@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'pry-byebug'
-
 # Responsible for finding minimum paths on a chess board
 class Knight
   attr_accessor :grid_size
