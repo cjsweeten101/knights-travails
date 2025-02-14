@@ -2,10 +2,11 @@
 
 # Responsible for finding minimum paths on a chess board
 class Knight
-  attr_accessor :grid_size
+  attr_accessor :grid_size, :moves
 
   def initialize
     @grid_size = 7
+    @moves = [[1, 2], [2, 1], [1, -2], [-1, 2], [-2, 1], [2, -1], [-2, -1], [-1, -2]]
   end
 
   def knight_moves(from, to)
@@ -39,18 +40,13 @@ class Knight
     end
   end
 
-  # TODO: Find a way to do this cleaner
   def get_next_moves(pos)
     result = []
 
-    result << [pos[0] + 2, pos[1] + 1] if valid?([pos[0] + 2, pos[1] + 1])
-    result << [pos[0] + 1, pos[1] + 2] if valid?([pos[0] + 1, pos[1] + 2])
-    result << [pos[0] + 1, pos[1] - 2] if valid?([pos[0] + 1, pos[1] - 2])
-    result << [pos[0] + 2, pos[1] - 1] if valid?([pos[0] + 2, pos[1] - 1])
-    result << [pos[0] - 2, pos[1] + 1] if valid?([pos[0] - 2, pos[1] + 1])
-    result << [pos[0] - 1, pos[1] + 2] if valid?([pos[0] - 1, pos[1] + 2])
-    result << [pos[0] - 1, pos[1] - 2] if valid?([pos[0] - 1, pos[1] - 2])
-    result << [pos[0] - 2, pos[1] - 1] if valid?([pos[0] - 2, pos[1] - 1])
+    moves.each do |x, y|
+      new_pos = [pos[0] + x, pos[1] + y]
+      result << new_pos if valid?(new_pos)
+    end
     result
   end
 
